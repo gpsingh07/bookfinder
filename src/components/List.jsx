@@ -14,7 +14,8 @@ function List(props) {
               - {item.author}
             </div>
             <div className="summary">
-              {item.summary}
+              {item.summary.length > 200 ? 
+                item.summary.slice(0,200) + '...' : item.summary}
             </div>
           </div>
         )

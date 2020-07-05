@@ -6,7 +6,6 @@ function Form(props) {
   const [value, setValue] = useState('');
   const [index, setIndex] = useState(-1);
   const handleDebounce = useCallback(debounce(q => props.findBook(q.toLowerCase()), 500), []);
-
   function handleClick(selected){
     setValue(props.suggestions[selected]);
     setIndex(selected);
@@ -15,11 +14,13 @@ function Form(props) {
 
   function handleChange(e){
     setValue(e.target.value);
+    setIndex(-1);
     handleDebounce(e);
   }
 
   function handleSubmit(e){
     setValue('');
+    setIndex(-1);
     props.handleSubmit(index);
   }
 
@@ -30,6 +31,7 @@ function Form(props) {
         placeholder="Search books" 
         onChange={handleChange} 
         value={value}
+        aria-label="Search Book"
       />
       <div className="suggestions">
         {props.suggestions.map( (title, i) => {
@@ -45,7 +47,7 @@ function Form(props) {
         })}
         
       </div>
-      <button onClick={handleSubmit} disabled={index === -1}>
+      <button onClick={handleSubmit} disabled={index === -1} aria-label="Submit">
         Submit
       </button> 
     </div>

@@ -1,4 +1,122 @@
 .App {
   text-align: center;
 }
+.app-header{
+  font-family: serif;
+  font-size: 32px;
+  padding: 16px 0;
+  background: #333;
+  color: white;
+  margin-bottom: 16px;
+}
 
+.list-cont{
+  margin: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.list-item{
+  margin: 16px 0;
+  padding: 16px;
+  border-radius: 5px;
+  box-shadow: #000000ad 2px 2px 8px -4px;
+  box-sizing: border-box;
+}
+
+.form-cont{
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 10%;
+  position: relative;
+}
+
+.form-cont input{
+  border: none;
+  border-bottom: 1px solid #333;
+  width: 70%;
+  font-size: 20px;
+}
+
+.form-cont .suggestions{
+  position: absolute;
+  top: 40px;
+  left: 10%;
+  width: 60%;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: #000000ad 2px 2px 8px -4px;
+}
+
+.suggestion{
+  padding: 10px;
+}
+.suggestion:hover{
+  background-color: #33333322;
+}
+.form-cont button{
+  font-size: 18px;
+  padding: 5px 15px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  box-shadow:  #000000ad 4px 4px 8px -4px;
+}
+
+.form-cont button:disabled{
+  background-color: #33333388;
+}
+
+.list-item .title{
+  font-weight: 600;
+  font-size: 24px;
+  margin: 5px
+}
+
+.list-item .author{
+  font-size: 18px;
+  margin: 10px;
+  padding-top: 8px;
+  border-top: 1px solid;
+  text-align: right;
+}
+
+.list-item .summary{
+  font-size: 16px;
+  margin: 8px;
+}
+
+@media only screen and (max-width: 600px) {
+  .list-item{
+    min-width: 100%;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .list-item{
+    max-width: 50%;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .list-item{
+    max-width: 33%;
+  }
+} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .list-item{
+    max-width: 25%;
+  }
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .list-item{
+    max-width: 25%;
+  }
+}

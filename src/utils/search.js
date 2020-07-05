@@ -1,7 +1,4 @@
-const dataSet = require('./data.json');
-const data = dataSet.summaries;
-
-const checkSubstirng = function(str, query){
+export const checkSubstirng = function(str, query){
 	const index = str.indexOf(query);
 	const endpoint = index + query.length;
 
@@ -14,9 +11,27 @@ const checkSubstirng = function(str, query){
 	return 2;
 }	
 
+//Array.prototype.flat is not availabel for certain node versions.
+
+const flat = function(x){
+	let y = [];
+	for(let i=0; i<x.length; i++){
+		if(Array.isArray(x[i]))
+				y= [...y, ...x[i]]
+		else
+				y.push(x[i])
+	}
+	return y;
+}
+
+/*
+	Checking Full query intially, in case of perfect match it gets best score.
+	Incase of absence of perfect match, partail search is applied and score is assigned based on that
+*/
+
 const search = function({list, query, count}){
 	let searchIndexes = {};
-	const searchString = query.trim();
+	const searchString = query.trim(); 				//trimming to avoid whitespace issues
 	for(let i=0; i<list.length; i++){
 		const fullSearch = checkSubstirng(list[i].toLowerCase(), searchString);
 		if(fullSearch < 3){
@@ -31,9 +46,21 @@ const search = function({list, query, count}){
 			searchIndexes[semiSearch] = searchIndexes[semiSearch] ? [...searchIndexes[semiSearch], i] : [i];
 		}
 	}
-	console.log(searchIndexes);
-	console.log(Object.values(searchIndexes).flat());
-	return Object.values(searchIndexes).flat().slice(0,count);
+	return flat(Object.values(searchIndexes)).slice(0,count);
 }
 
-export default search;
+
+//Keeping cache to avoid repeated search for queries
+const memoizedSearch = (function(){
+	let cache = {};
+	function func({list, query, count}){
+		if(cache.hasOwnProperty(query)){
+			return cache[query].slice(0,count)
+		}
+		cache[query] = search({list, query, count: 8})
+		return cache[query].slice(0,count);
+	}
+	return func;
+})();
+
+export default memoizedSearch;

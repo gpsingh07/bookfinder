@@ -26,10 +26,10 @@ function App() {
   }
 
   return (
-    <div className="App">    
-      <header className="app-header">
-        Book Finder
-      </header>
+    <div className="App">
+    <header className="app-header">
+      Book Finder
+    </header>
       <Form 
         suggestions={suggestions} 
         findBook={findBook} 
